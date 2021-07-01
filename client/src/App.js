@@ -7,21 +7,22 @@ import PostsList from './components/PostsList.jsx';
 import AddPostForm from './components/AddPostForm.jsx'
 import { fetchPosts } from './actions/post';
 import { useDispatch } from 'react-redux';
-const useStyles = makeStyles( (theme) => 
-  ({
-    root:{
-      flexGrow:1,
-    },
-    menuButton:{
-      marginRight: theme.spacing(2)
-    },
-    title:{
-      flexGrow: 1,
-    },
-    container:{
-      marginTop: theme.spacing(3)
-    }
-  })
+import PostDetails from './components/PostDetails.jsx';
+const useStyles = makeStyles((theme) =>
+({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2)
+  },
+  title: {
+    flexGrow: 1,
+  },
+  container: {
+    marginTop: theme.spacing(3)
+  }
+})
 )
 
 export const App = () => {
@@ -32,7 +33,7 @@ export const App = () => {
     dispatch(fetchPosts());
   }, [dispatch])
 
-  const [ open, setOpen ] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
     setOpen(true)
@@ -45,44 +46,47 @@ export const App = () => {
   const classes = useStyles();
   return (
     <>
-    <CssBaseline />
-    <Container maxWidth="lg">
-      <AppBar 
-        position="static" 
-        color="inherit"
-        elevation={0}>
-        <Toolbar>
-          <IconButton 
-          edge="start" 
-          className={classes.menuButton}
+      <CssBaseline />
+      <Container maxWidth="lg">
+        <AppBar
+          position="static"
           color="inherit"
-          aria-label="menu"
-          >
-          </IconButton>
-          <Typography 
-            variant="h6" 
-            color="secondary" 
-            className={classes.title}
+          elevation={0}>
+          <Toolbar>
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="menu"
+            >
+            </IconButton>
+            <Typography
+              variant="h6"
+              color="secondary"
+              className={classes.title}
             >
               <a href="/posts">FoodCourt</a>
             </Typography>
-          <Button color="primary" variant="outlined" startIcon={<PenIcon />} onClick={handleOpen}>Yeni Yazi</Button>
-        </Toolbar>
-      </AppBar>
+            <Button color="primary" variant="outlined" startIcon={<PenIcon />} onClick={handleOpen}>Yeni Yazi</Button>
+          </Toolbar>
+        </AppBar>
 
-      <Grid container className={classes.container}>
-        <Grid item xs={12} >
-          <Router>
-            <Switch>
-              <Route exact path="/posts" component={PostsList}></Route>
-            </Switch>
-            <Redirect from="/" to="/posts" ></Redirect>
-          </Router>
+        <Grid container className={classes.container}>
+          <Grid item xs={12} >
+            <Router>
+              <Switch>
+                <Route exact path="/posts" component={PostsList}></Route>
+
+                <Route exact path="/posts/:id" component={PostDetails}></Route>
+
+              </Switch>
+              <Redirect from="/" to="/posts" ></Redirect>
+            </Router>
+          </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
 
-    <AddPostForm open={open} handleClose={handleClose} />
+      <AddPostForm open={open} handleClose={handleClose} />
     </>
   )
 }
