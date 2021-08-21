@@ -76,9 +76,7 @@ export const App = () => {
             <Router>
               <Switch>
                 <Route exact path="/posts" component={PostsList}></Route>
-
                 <Route exact path="/posts/:id" component={PostDetails}></Route>
-
               </Switch>
               <Redirect from="/" to="/posts" ></Redirect>
             </Router>

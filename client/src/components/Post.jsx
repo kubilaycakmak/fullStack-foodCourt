@@ -48,11 +48,13 @@ const Post = ({ _id, title, subtitle, content, tag, image, createdAt }) => {
 
     return (
         <Card className={classes.root}>
-            <CardMedia 
-                className={classes.media} 
-                image={image || noImage} 
-                title="Image"
-            ></CardMedia>
+            <Link to={`/posts/${_id}`}>
+                <CardMedia 
+                    className={classes.media} 
+                    image={image || noImage} 
+                    title="Image"
+                ></CardMedia>
+            </Link>
             <div className={classes.overlay}>
                 <Typography variant="h6">owner</Typography>
                 <Typography variant="body2">{convertRelativeTime(createdAt)}</Typography>
